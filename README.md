@@ -2,7 +2,7 @@
 Little enhanced version of the contacts app. In this one the contact list items have avatar image and full name.
 
 # Screenshot
-![screenshot](https://github.com/fariduca/contacts-enhanced-java/blob/main/img/screenshot.PNG)
+![screenshot](https://github.com/fariduca/contacts-enhanced-java/blob/main/img/screenshot_new.PNG)
 
 # Requirements:
 - [JavaFX library](https://openjfx.io/)
