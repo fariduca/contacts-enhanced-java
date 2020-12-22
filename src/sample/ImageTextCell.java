@@ -44,9 +44,9 @@ public class ImageTextCell extends ListCell<Contact> {
                 e.printStackTrace();
             }
             fullNameLabel.setText(
-                    contact.getFirstName()
+                    contact.getLastName()
                     .concat(" ")
-                    .concat(contact.getLastName())
+                    .concat(contact.getFirstName())
             );
             setGraphic(hBox);
         }

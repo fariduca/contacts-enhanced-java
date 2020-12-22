@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.util.Callback;
 
 import java.awt.event.TextListener;
+import java.util.Comparator;
 
 public class ContactsController {
 
@@ -32,6 +33,9 @@ public class ContactsController {
 
     @FXML
     private Button removeButton;
+
+    @FXML
+    private Button saveButton;
 
     public void initialize() {
         contacts.add(new Contact("Bob", "Marley", "bob@m.com", "12345"));
@@ -57,6 +61,7 @@ public class ContactsController {
                             phoneTextField.setDisable(false);
                             phoneTextField.setEditable(true);
                             removeButton.setDisable(false);
+                            saveButton.setDisable(false);
 
                             firstTextField.setText(t1.getFirstName());
                             lastTextField.setText(t1.getLastName());
@@ -129,20 +134,38 @@ public class ContactsController {
         phoneTextField.setEditable(false);
         phoneTextField.setDisable(true);
         removeButton.setDisable(true);
+        saveButton.setDisable(true);
     }
 
     @FXML
     void addContactPressed(ActionEvent event) {
-        contacts.add(new Contact("", "New", "", ""));
+        Contact c = new Contact("", "New", "", "");
+        contacts.add(c);
+        contacts.sort(new MyComparator());
         listView.setItems(contacts);
-        listView.getSelectionModel().selectLast();
+        listView.getSelectionModel().select(c);
     }
 
     @FXML
     void removeContactPressed(ActionEvent event) {
         if (listView.getSelectionModel().getSelectedIndex() != -1) {
             contacts.remove(listView.getSelectionModel().getSelectedIndex());
+            contacts.sort(new MyComparator());
             listView.setItems(contacts);
+        }
+    }
+
+    @FXML
+    void saveButtonPressed(ActionEvent event) {
+        contacts.sort(new MyComparator());
+        listView.setItems(contacts);
+    }
+
+    private static class MyComparator implements Comparator<Contact> {
+
+        @Override
+        public int compare(Contact o1, Contact o2) {
+            return o1.getLastName().compareToIgnoreCase(o2.getLastName());
         }
     }
 
